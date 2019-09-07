@@ -4,8 +4,10 @@ Name: Liam Williams
 Date started: 27/08/19
 GitHub URL: https://github.com/cp1404-students/2019-2-a1-LiamWilliams1
 """
-FILE_NAME = "movies.csv"
-MENU_OPTIONS = ["Q", "L", "A", "W" "C"]
+#my universal variables
+#had to change to the movie backup file as it was the only way it would load
+FILE_NAME = "movies_backup.csv"
+MENU_OPTIONS = ["Q", "L", "A", "W"]
 MENU = """L - List Movies
 A - Add new movie
 W - watch a movie
@@ -42,7 +44,7 @@ def display_list(movie_lists):
         else:
             tag = " "
 
-        print("{:3} {:2} {:} {:} ({})".format(index, tag, movie[0], movie[1], movie[2]))
+        print("{:3} {:2} {:37} {:} ({})".format(index, tag, movie[0], movie[1], movie[2]))
         index = index + 1
     print(count, "movies watch", len(movie_lists) - count, "movies left to watch")
 
@@ -86,13 +88,24 @@ def add_movie(lists_of_movies):
     #new_movie.append([movie_name, Category, year, watched])
     #print(new_movie)
     #print(lists_of_movies)
-    print("{}({}from {}) added to movie list".format(movie_name, Category, year,))
+    print("{}({} from {}) added to movie list".format(movie_name, Category, year,))
 
+def watchmovie(movies_list):
+    movie_num = ()
+    valid = False
+    while not valid:
+        try:
+            movie_num = int(input("Enter the number of movie to be marked as watched"))
+            valid = True
+        except ValueError:
+            print("Invalid input; enter a valid number")
+    movies_list[movie_num][3] = 'w'
 
 #def quit():
 
 def main():
-    print("Songs To Learn 1.0 - by <Liam Williams>")
+    print("Movies to Watch 1.0 - by <Liam Williams>")
+
     lists_of_movies, counter = load_movie()
     print(counter, "movies loaded")
     Menu_Choice = input(MENU).upper().strip()
@@ -102,8 +115,7 @@ def main():
         elif Menu_Choice == "A":
             add_movie(lists_of_movies)
         elif Menu_Choice == "W":
-            #watchmovie(lists_of_movies)
-
+            watchmovie(lists_of_movies)
         else:
             print("invalid Input please try again")
         Menu_Choice = input(MENU).upper()
