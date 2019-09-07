@@ -64,6 +64,9 @@ def display_list(movie_lists):
     #lists_of_movies.append([movie_name, Category, year, watched])
     #print("{}({} from {}) added to movie list".format(movie_name, Category, year,))
 
+#acquires movie details from user.
+#places the details into list
+
 def add_movie(lists_of_movies):
     #new_movie = [lists_of_movies]
     movie_name = input("Title:")
