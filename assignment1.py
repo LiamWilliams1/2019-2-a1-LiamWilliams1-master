@@ -46,16 +46,35 @@ def display_list(movie_lists):
         index = index + 1
     print(count, "movies watch", len(movie_lists) - count, "movies left to watch")
 
+def add_movie(lists_of_movies):
+    movie_name = input("Title:")
+    while len(movie_name) < 1:
+        print("input cannot be blank")
+        movie_name = input("Title:")
+    year = input("year")
+    while len(year) < 1:
+        print("input cannot be blank")
+        year = input("year")
+    Category = input("input genre")
+    while len(Category) < 1:
+        print("input cannot be blank")
+        genre = input("input genre")
+    watched = ("u")
+    lists_of_movies.append([movie_name, Category, year, ])
+    print("{}({} from {}) added to movie list".format(movie_name, Category, year,))
 
+#def quit():
 
 def main():
     print("Songs To Learn 1.0 - by <Liam Williams>")
     lists_of_movies, counter = load_movie()
     print(counter, "movies loaded")
     Menu_Choice = input(MENU).upper().strip()
-    while Menu_Choice != "Q":
+    if Menu_Choice == "Q":
         if Menu_Choice == "L":
             display_list(lists_of_movies)
+        elif Menu_Choice == "A":
+            add_movie(lists_of_movies)
         else:
             print("invalid Input please try again")
         Menu_Choice = input(MENU).upper()
