@@ -14,7 +14,8 @@ W - watch a movie
 Q - Quit \n >>> """
 
 
-
+#load movie function opens file, reads it then places it in a list if lists
+#file appears as universal variable "FILE_NAME"
 def load_movie():
     lists_of_movies = []
     count_movies = 0
@@ -31,7 +32,9 @@ def load_movie():
     in_file.close()
     return lists_of_movies, count_movies
 
-
+# function displays list of list in a grid when called.
+#function taggeds movies that are watched with '*'
+#functions displays movies watched and unwatched
 def display_list(movie_lists):
     tag = ()
     count = 0
@@ -46,7 +49,7 @@ def display_list(movie_lists):
 
         print("{:3} {:2} {:37} {:} ({})".format(index, tag, movie[0], movie[1], movie[2]))
         index = index + 1
-    print(count, "movies watch", len(movie_lists) - count, "movies left to watch")
+    print(count, "movies watched", len(movie_lists) - count, "movies left to watch")
 
 #my intial attempt at an add movie function. For some reason I wouldn't append to the movie list. I couldn't figure out why.
 #def add_movie_check(lists_of_movies):
@@ -68,15 +71,14 @@ def display_list(movie_lists):
 
 #acquires movie details from user.
 #places the details into list
-
 def add_movie(lists_of_movies):
     #new_movie = [lists_of_movies]
     movie_name = input("Title:")
     while len(movie_name) < 1:
         print("input cannot be blank")
         movie_name = input("Title:")
-    year = input("year")
-    while len(year) < 1:
+    year = int(input("year"))
+    while year < 1 and year > 2020 :
         print("input cannot be blank")
         year = input("year")
     Category = input("input genre")
@@ -90,6 +92,8 @@ def add_movie(lists_of_movies):
     #print(lists_of_movies)
     print("{}({} from {}) added to movie list".format(movie_name, Category, year,))
 
+#function ask user for number of movie they want to resgister as watched
+#function tags said movie as watched
 def watchmovie(movies_list):
     movie_num = ()
     valid = False
@@ -101,6 +105,8 @@ def watchmovie(movies_list):
             print("Invalid input; enter a valid number")
     movies_list[movie_num][3] = 'w'
 
+#function takes list and writes it back into file with all changes
+#function then quits program
 def quit_movie(lists_of_movies):
     out_file = open(FILE_NAME, "w")
     for movie in lists_of_movies:
@@ -108,7 +114,8 @@ def quit_movie(lists_of_movies):
     #print((lists_of_movies), file=out_file)
     out_file.close()
 
-
+#main functions displays menu to user
+#calls all other function
 def main():
     print("Movies to Watch 1.0 - by <Liam Williams>")
 
