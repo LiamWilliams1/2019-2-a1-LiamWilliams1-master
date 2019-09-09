@@ -6,7 +6,7 @@ GitHub URL: https://github.com/cp1404-students/2019-2-a1-LiamWilliams1
 """
 #my universal variables
 #had to change to the movie backup file as it was the only way it would load
-FILE_NAME = "movies_backup.csv"
+FILE_NAME = "movies.csv"
 MENU_OPTIONS = ["Q", "L", "A", "W"]
 MENU = """L - List Movies
 A - Add new movie
@@ -101,7 +101,13 @@ def watchmovie(movies_list):
             print("Invalid input; enter a valid number")
     movies_list[movie_num][3] = 'w'
 
-#def quit():
+def quit_movie(lists_of_movies):
+    out_file = open(FILE_NAME, "w")
+    for movie in lists_of_movies:
+        out_file.write("%s\n" % movie)
+    #print((lists_of_movies), file=out_file)
+    out_file.close()
+
 
 def main():
     print("Movies to Watch 1.0 - by <Liam Williams>")
@@ -110,6 +116,7 @@ def main():
     print(counter, "movies loaded")
     Menu_Choice = input(MENU).upper().strip()
     while Menu_Choice != "Q":
+        quit_movie(lists_of_movies)
         if Menu_Choice == "L":
             display_list(lists_of_movies)
         elif Menu_Choice == "A":
